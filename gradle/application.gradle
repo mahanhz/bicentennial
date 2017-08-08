@@ -1,0 +1,78 @@
+project("application") {
+	description = "Application"
+
+	dependencies {
+		compile project(':application:configuration')
+
+		optional ("org.springframework.boot:spring-boot-devtools")
+	}
+}
+
+project("application:adapter") {
+	description = "Application adapter"
+
+	dependencies {
+		compile project(':application:core')
+
+		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
+
+		testCompile app_tests.unit_test
+	}
+}
+
+project("application:configuration") {
+	description = "Application configuration"
+
+	dependencies {
+		compile project(':application:adapter')
+		compile project(':application:core')
+		compile project(':application:periphery:data')
+		compile project(':application:periphery:ui')
+
+		compile ('org.springframework.boot:spring-boot-starter-actuator')
+		compile ('org.springframework.boot:spring-boot-actuator-docs')
+		compile ('org.springframework.boot:spring-boot-starter-aop')
+		compile ('org.springframework.retry:spring-retry')
+
+		compile ("com.h2database:h2")
+
+		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
+	}
+}
+
+project("application:core") {
+	description = "Application core"
+
+	dependencies {
+		compile group: 'org.apache.commons', name: 'commons-lang3', version: "${versions.commonsLang}"
+		compile group: 'commons-validator', name: 'commons-validator', version: "${versions.commonsValidator}"
+
+		testCompile app_tests.unit_test
+	}
+}
+
+project("application:periphery:data") {
+	description = "Application periphery data"
+
+	// Need to override version to be 5.2.3 or greater so that we can use "hibernate.jdbc.time_zone: UTC"
+	ext['hibernate.version'] = '5.2.10.Final'
+
+	dependencies {
+		compile project(':application:core')
+
+		compile("org.springframework.boot:spring-boot-starter-data-jpa")
+		compile('org.springframework.boot:spring-boot-starter-actuator')
+		compile('org.springframework.boot:spring-boot-actuator-docs')
+		compile("org.apache.commons:commons-lang3:${versions.commonsLang}")
+
+		testCompile app_tests.unit_test
+	}
+}
+
+project("application:periphery:ui") {
+	description = "Application periphery ui"
+
+	dependencies {
+		compile project(':application:adapter')
+	}
+}
