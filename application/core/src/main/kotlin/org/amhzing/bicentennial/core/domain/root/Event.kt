@@ -1,4 +1,4 @@
-package org.amhzing.bicentennial.core
+package org.amhzing.bicentennial.core.domain.root
 
 import org.amhzing.bicentennial.core.domain.valueobject.Contact
 import org.amhzing.bicentennial.core.domain.valueobject.Id
