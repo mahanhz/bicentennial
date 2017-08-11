@@ -1,6 +1,8 @@
 buildscript {
 	ext {
+        springBootVersion = '1.5.6.RELEASE'
 		propDepsVersion = '0.0.9.RELEASE'
+        kotlinVersion = '1.1.3'
 	}
 	repositories {
 		mavenCentral()
@@ -13,20 +15,23 @@ buildscript {
 		}
 	}
 	dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 		classpath ("io.spring.gradle:propdeps-plugin:${propDepsVersion}")
+        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath ("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath ("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
 	}
 }
 
 plugins {
-    id 'org.springframework.boot' version '1.5.6.RELEASE'
-	id "org.jetbrains.kotlin.jvm" version "1.1.3"
-	id "org.jetbrains.kotlin.plugin.spring" version "1.1.3"
+    id "io.spring.dependency-management" version "1.0.3.RELEASE"
 }
 
 configure(allprojects) {
 	apply plugin: 'java'
 	apply plugin: 'kotlin'
 	apply plugin: "kotlin-spring"
+    apply plugin: "kotlin-jpa"
 
 	apply plugin: 'propdeps'
 	apply plugin: 'propdeps-maven'
@@ -48,6 +53,12 @@ configure(allprojects) {
 def frameworkAgnostic = [':application:core', ':application:adapter']
 configure(subprojects - frameworkAgnostic.collect { project(it) }) {
 	apply plugin: 'io.spring.dependency-management'
+
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+		}
+	}
 }
 
 configure([project(':application')]) {
