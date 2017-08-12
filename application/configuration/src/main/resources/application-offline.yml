@@ -1,0 +1,11 @@
+security:
+  ignored: /h2-console/**
+
+server:
+  port: 13003
+
+spring:
+  datasource:
+    platform: h2
+  jpa:
+    generate-ddl: true

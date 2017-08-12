@@ -6,6 +6,21 @@ project("application") {
 
 		optional ("org.springframework.boot:spring-boot-devtools")
 	}
+
+	springBoot {
+		mainClass = 'org.amhzing.bicentennial.MainApplicationKt'
+
+		buildInfo {
+			additionalProperties = [
+					'description': "${description}"
+			]
+		}
+	}
+
+	// Make the System.properties available in the bootRun task.
+	bootRun {
+		systemProperties = System.properties
+	}
 }
 
 project("application:adapter") {
@@ -60,10 +75,10 @@ project("application:periphery:data") {
 	dependencies {
 		compile project(':application:core')
 
+		compile("org.apache.commons:commons-lang3:${versions.commonsLang}")
 		compile("org.springframework.boot:spring-boot-starter-data-jpa")
 		compile('org.springframework.boot:spring-boot-starter-actuator')
 		compile('org.springframework.boot:spring-boot-actuator-docs')
-		compile("org.apache.commons:commons-lang3:${versions.commonsLang}")
 
 		testCompile app_tests.unit_test
 	}
@@ -74,5 +89,8 @@ project("application:periphery:ui") {
 
 	dependencies {
 		compile project(':application:adapter')
+
+		compile("org.springframework.boot:spring-boot-starter-web")
+		compile("org.springframework.boot:spring-boot-starter-aop")
 	}
 }

@@ -72,7 +72,8 @@ task wrapper(type: Wrapper) {
 ext {
 	versions = [
 		commonsLang: '3.6',
-        commonsValidator: '1.6'
+        commonsValidator: '1.6',
+		modelMapper: '1.1.0'
 	]
 	test_versions = [
 		kotlinTest: '2.0.5'
