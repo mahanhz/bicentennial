@@ -44,6 +44,8 @@ project("application:configuration") {
 		compile project(':application:periphery:data')
 		compile project(':application:periphery:ui')
 
+		compile("org.liquibase:liquibase-core:${versions.liquibase}")
+
 		compile ('org.springframework.boot:spring-boot-starter-actuator')
 		compile ('org.springframework.boot:spring-boot-actuator-docs')
 		compile ('org.springframework.boot:spring-boot-starter-aop')

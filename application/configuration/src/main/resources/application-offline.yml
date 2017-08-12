@@ -7,5 +7,3 @@ server:
 spring:
   datasource:
     platform: h2
-  jpa:
-    generate-ddl: true
