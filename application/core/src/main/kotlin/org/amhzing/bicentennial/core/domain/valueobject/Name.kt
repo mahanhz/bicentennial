@@ -2,7 +2,6 @@ package org.amhzing.bicentennial.core.domain.valueobject
 
 import org.apache.commons.lang3.StringUtils.trim
 import org.apache.commons.lang3.Validate
-import org.apache.commons.lang3.Validate.notBlank
 
 const val NAME_MAX_LENGTH = 250
 
@@ -14,7 +13,7 @@ class Name(value: String) {
     }
 
     private fun validate(input: String): String {
-        val trimmed = trim(notBlank(input))
+        val trimmed = trim(input)
         Validate.isTrue(trimmed.length <= NAME_MAX_LENGTH)
 
         return trimmed

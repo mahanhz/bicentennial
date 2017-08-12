@@ -10,8 +10,8 @@ import org.amhzing.bicentennial.data.jpa.entity.Location as LocationEntity
 
 
 class EventDetailsRepository(val eventJpaRepository: EventJpaRepository) : EventRepository {
-    override fun events(latitude: Double, longitude: Double): List<Event> {
-        val events = eventJpaRepository.findAll()
+    override fun events(latitude: Double, longitude: Double, distance: Int): List<Event> {
+        val events = eventJpaRepository.findNearbyEvents(latitude, longitude, distance)
 
         return events.map(this::event).toList()
     }
@@ -25,7 +25,7 @@ class EventDetailsRepository(val eventJpaRepository: EventJpaRepository) : Event
     }
 
     private fun location(location: LocationEntity): Location {
-        val address = Address(Country(location.country, ""), Cluster(location.cluster), location.addressLine)
+        val address = Address(Country(location.country, "Sweden"), Cluster(location.cluster), location.addressLine)
         val coordinates = Coordinate(location.latitude, location.longitude)
 
         return Location(address, coordinates)

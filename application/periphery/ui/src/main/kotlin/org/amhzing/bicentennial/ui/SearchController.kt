@@ -10,7 +10,7 @@ class SearchController(private val searchEventAdapter: SearchEventAdapter) {
 
     @GetMapping(path = arrayOf("/search"))
     fun search() : String {
-        searchEventAdapter.events(59.383526, 17.978573)
+        val events = searchEventAdapter.events(59.383526, 17.978573, 5)
 
         return "searchResults"
     }

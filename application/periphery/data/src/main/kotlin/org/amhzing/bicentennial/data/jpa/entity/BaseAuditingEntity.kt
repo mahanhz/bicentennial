@@ -5,7 +5,7 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedBy
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.LocalDateTime
+import java.util.*
 import javax.persistence.EntityListeners
 import javax.persistence.MappedSuperclass
 import javax.persistence.Version
@@ -18,13 +18,13 @@ abstract class BaseAuditingEntity {
     var version: Int = 0
 
     @CreatedDate
-    lateinit var createdDate: LocalDateTime
+    lateinit var createdDate: Date
 
     @CreatedBy
     lateinit var createdBy: String
 
     @LastModifiedDate
-    lateinit var lastModifiedDate: LocalDateTime
+    lateinit var lastModifiedDate: Date
 
     @LastModifiedBy
     lateinit var lastModifiedBy: String

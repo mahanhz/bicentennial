@@ -71,7 +71,7 @@ task wrapper(type: Wrapper) {
 }
 
 sourceSets {
-	main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
+	main.kotlin.srcDirs += [file("$buildDir/generated/source/kapt/main")]
 }
 
 ext {

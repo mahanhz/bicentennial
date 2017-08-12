@@ -7,8 +7,8 @@ import org.amhzing.bicentennial.core.domain.root.Event
 
 class SearchEventAdapter(private val retrieveEventService: RetrieveEventService) {
 
-    fun events(latitude: Double, longitude: Double): List<EventDTO> {
-        val events = retrieveEventService.events(latitude, longitude)
+    fun events(latitude: Double, longitude: Double, distance: Int): List<EventDTO> {
+        val events = retrieveEventService.events(latitude, longitude, distance)
 
         return events.map(this::eventDto)
     }
