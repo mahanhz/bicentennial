@@ -29,6 +29,8 @@ project("application:adapter") {
 	dependencies {
 		compile project(':application:core')
 
+		compile ("com.fasterxml.jackson.module:jackson-module-kotlin:${versions.jacksonKotlin}")
+		compile ("org.modelmapper:modelmapper:${versions.modelMapper}")
 		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
 
 		testCompile app_tests.unit_test
@@ -94,5 +96,12 @@ project("application:periphery:ui") {
 
 		compile("org.springframework.boot:spring-boot-starter-web")
 		compile("org.springframework.boot:spring-boot-starter-aop")
+		compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+		//compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${ui_versions.thymeleafSpringSecurity}")
+		compile("org.webjars:bootstrap:${ui_versions.webjarsBootstrap}")
+		compile("org.webjars:font-awesome:${ui_versions.webjarsFontAwesome}")
+		compile("org.webjars:jquery:${ui_versions.webjarsJquery}")
+		compile("org.webjars:modernizr:${ui_versions.webjarsModernizr}")
+		compile("org.webjars:webjars-locator:${ui_versions.webjarsLocator}")
 	}
 }

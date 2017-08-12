@@ -73,8 +73,17 @@ ext {
 	versions = [
 		commonsLang: '3.6',
         commonsValidator: '1.6',
-		modelMapper: '1.1.0',
-		liquibase: '3.5.3'
+		jacksonKotlin: '2.9.0',
+		liquibase: '3.5.3',
+		modelMapper: '1.1.0'
+	]
+	ui_versions = [
+			thymeleafSpringSecurity: '3.0.2.RELEASE',
+			webjarsBootstrap: '3.3.7-1',
+			webjarsFontAwesome: '4.7.0',
+			webjarsJquery: '3.2.1',
+			webjarsLocator: '0.32-1',
+			webjarsModernizr: '2.8.3'
 	]
 	test_versions = [
 		kotlinTest: '2.0.5'
