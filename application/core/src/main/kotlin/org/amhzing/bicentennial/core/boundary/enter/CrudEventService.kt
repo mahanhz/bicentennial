@@ -4,7 +4,7 @@ import org.amhzing.bicentennial.core.domain.root.Event
 import org.amhzing.bicentennial.core.domain.valueobject.Id
 
 
-interface CrudEvent {
+interface CrudEventService {
 
     fun create(event: Event)
 

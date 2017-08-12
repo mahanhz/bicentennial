@@ -1,14 +1,14 @@
 package org.amhzing.bicentennial.adapter
 
 import org.amhzing.bicentennial.adapter.dto.EventDTO
-import org.amhzing.bicentennial.core.boundary.enter.RetrieveEvent
+import org.amhzing.bicentennial.core.boundary.enter.RetrieveEventService
 import org.amhzing.bicentennial.core.domain.root.Event
 
 
-class SearchEventAdapter(private val retrieveEvent: RetrieveEvent) {
+class SearchEventAdapter(private val retrieveEventService: RetrieveEventService) {
 
     fun events(latitude: Double, longitude: Double): List<EventDTO> {
-        val events = retrieveEvent.events(latitude, longitude)
+        val events = retrieveEventService.events(latitude, longitude)
 
         return events.map(this::eventDto)
     }

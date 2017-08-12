@@ -84,6 +84,10 @@ project("application:periphery:data") {
 		compile('org.springframework.boot:spring-boot-starter-actuator')
 		compile('org.springframework.boot:spring-boot-actuator-docs')
 
+		compile("com.querydsl:querydsl-collections:${versions.querydsl}")
+		compile("com.querydsl:querydsl-jpa:${versions.querydsl}")
+		kapt("com.querydsl:querydsl-apt:${versions.querydsl}:jpa")
+
 		testCompile app_tests.unit_test
 	}
 }

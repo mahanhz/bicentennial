@@ -4,3 +4,5 @@
 build/
 application/core/out/
 application/periphery/data/out/
+application/configuration/out/
+application/periphery/ui/out/
