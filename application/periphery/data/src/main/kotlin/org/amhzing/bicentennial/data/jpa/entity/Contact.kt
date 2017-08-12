@@ -1,4 +1,4 @@
-package com.example.clean.app.data.jpa.entity
+package org.amhzing.bicentennial.data.jpa.entity
 
 import javax.persistence.Column
 import javax.persistence.Embeddable

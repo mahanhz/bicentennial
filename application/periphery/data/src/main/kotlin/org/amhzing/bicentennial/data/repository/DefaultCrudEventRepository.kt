@@ -1,15 +1,14 @@
 package org.amhzing.bicentennial.data.repository
 
-import com.example.clean.app.data.jpa.entity.Contact
-import com.example.clean.app.data.jpa.entity.Location
 import org.amhzing.bicentennial.core.boundary.exit.CrudEventRepository
 import org.amhzing.bicentennial.core.domain.root.Event
 import org.amhzing.bicentennial.core.domain.valueobject.Id
+import org.amhzing.bicentennial.data.jpa.entity.Contact
 import org.amhzing.bicentennial.data.jpa.entity.EventEntity
+import org.amhzing.bicentennial.data.jpa.entity.Location
 import org.amhzing.bicentennial.data.jpa.repository.EventJpaRepository
-
-import org.amhzing.bicentennial.core.domain.valueobject.Location as EventLocation
 import org.amhzing.bicentennial.core.domain.valueobject.Contact as EventContact
+import org.amhzing.bicentennial.core.domain.valueobject.Location as EventLocation
 
 
 class DefaultCrudEventRepository(val eventJpaRepository: EventJpaRepository) : CrudEventRepository {

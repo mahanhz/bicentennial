@@ -1,7 +1,5 @@
 package org.amhzing.bicentennial.data.jpa.entity
 
-import com.example.clean.app.data.jpa.entity.Contact
-import com.example.clean.app.data.jpa.entity.Location
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
