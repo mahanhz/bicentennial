@@ -84,12 +84,12 @@ ext {
 		querydsl: "4.1.4"
 	]
 	ui_versions = [
-			thymeleafSpringSecurity: '3.0.2.RELEASE',
-			webjarsBootstrap: '3.3.7-1',
-			webjarsFontAwesome: '4.7.0',
-			webjarsJquery: '3.2.1',
-			webjarsLocator: '0.32-1',
-			webjarsModernizr: '2.8.3'
+		thymeleafSpringSecurity: '3.0.2.RELEASE',
+		webjarsBootstrap: '3.3.7-1',
+		webjarsFontAwesome: '4.7.0',
+		webjarsJquery: '3.2.1',
+		webjarsLocator: '0.32-1',
+		webjarsModernizr: '2.8.3'
 	]
 	test_versions = [
 		kotlinTest: '2.0.5'
@@ -97,14 +97,14 @@ ext {
 }
 
 ext.app_tests = [
-		spring_test: [
-			"org.springframework.boot:spring-boot-starter-test",
-		],
-		unit_test: [
-			"io.kotlintest:kotlintest:${test_versions.kotlinTest}",
-			"org.jetbrains.kotlin:kotlin-test",
-			"org.jetbrains.kotlin:kotlin-test-junit"
-		]
+	spring_test: [
+		"org.springframework.boot:spring-boot-starter-test",
+	],
+	unit_test: [
+		"io.kotlintest:kotlintest:${test_versions.kotlinTest}",
+		"org.jetbrains.kotlin:kotlin-test",
+		"org.jetbrains.kotlin:kotlin-test-junit"
+	]
 ]
 
 apply from: 'gradle/application.gradle'
