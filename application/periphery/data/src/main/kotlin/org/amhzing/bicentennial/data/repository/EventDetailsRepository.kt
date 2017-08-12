@@ -10,7 +10,7 @@ import org.amhzing.bicentennial.data.jpa.entity.Location as LocationEntity
 
 
 class EventDetailsRepository(val eventJpaRepository: EventJpaRepository) : EventRepository {
-    override fun events(): List<Event> {
+    override fun events(latitude: Double, longitude: Double): List<Event> {
         val events = eventJpaRepository.findAll()
 
         return events.map(this::event).toList()

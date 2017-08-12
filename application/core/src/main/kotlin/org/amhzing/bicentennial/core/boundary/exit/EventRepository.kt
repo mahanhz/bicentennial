@@ -5,5 +5,5 @@ import org.amhzing.bicentennial.core.domain.root.Event
 
 interface EventRepository {
 
-    fun events(): List<Event>
+    fun events(latitude: Double, longitude: Double): List<Event>
 }
