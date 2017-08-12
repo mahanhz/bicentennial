@@ -6,7 +6,7 @@ import org.amhzing.bicentennial.core.domain.root.Event
 import org.amhzing.bicentennial.core.domain.valueobject.Id
 
 
-class EventCrudUseCase(private val crudEventRepository: CrudEventRepository) : CrudEventService {
+class CrudEventUseCase(private val crudEventRepository: CrudEventRepository) : CrudEventService {
 
     override fun create(event: Event) {
         crudEventRepository.create(event)
