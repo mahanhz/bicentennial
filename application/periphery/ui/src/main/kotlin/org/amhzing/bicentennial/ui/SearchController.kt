@@ -3,6 +3,7 @@ package org.amhzing.bicentennial.ui
 import com.google.maps.GeoApiContext
 import com.google.maps.GeocodingApi
 import org.amhzing.bicentennial.adapter.SearchEventAdapter
+import org.amhzing.bicentennial.ui.model.LocationModel
 import org.amhzing.bicentennial.ui.model.SearchEvent
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -40,6 +41,7 @@ class SearchController(private val searchEventAdapter: SearchEventAdapter) {
 
             val location = result[0].geometry.location
             val events = searchEventAdapter.events(location.lat, location.lng, searchEvent.distance)
+            model.addAttribute("startingPoint", LocationModel(result[0].formattedAddress, location.lat, location.lng))
             model.addAttribute("events", events)
         } catch (e: Exception) {
             System.out.println("Mahan an error" + e);

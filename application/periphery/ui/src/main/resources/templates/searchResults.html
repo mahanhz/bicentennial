@@ -12,30 +12,73 @@
         <div class="container-fluid">
             <div class="row">
                 <div id="eventDetailsInline" style="display:none">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Address</th>
-                            <th>Contact Name</th>
-                            <th>Contact Email</th>
-                            <th>Contact Number</th>
-                            <th>Info</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="default" th:each="event, rowStat : *{events}">
-                            <td th:text="${event.address}">1</td>
-                            <td th:text="${event.contactName}">1</td>
-                            <td th:text="${event.contactEmail}">1</td>
-                            <td th:text="${event.contactNumber}">1</td>
-                            <td th:text="${event.info}">1</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th>Contact Name</th>
+                                <th>Contact Email</th>
+                                <th>Contact Number</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="default" th:each="event, rowStat : *{events}">
+                                <td th:text="${event.address}">1</td>
+                                <td th:text="${event.contactName}">1</td>
+                                <td th:text="${event.contactEmail}">1</td>
+                                <td th:text="${event.contactNumber}">1</td>
+                                <td th:text="${event.info}">1</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div id="map"></div>
             </div>
         </div>
 
         <th:block th:replace="fragments/javascript :: javascript"></th:block>
+
+        <script th:inline="javascript">
+        function initMap() {
+            /*<![CDATA[*/
+            var startingPoint = /*[[${startingPoint}]]*/ null;
+            var events = /*[[${events}]]*/ null;
+
+            if (events != null) {
+
+                var mapLoc = {lat: events[0].latitude, lng: events[0].longitude};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 4,
+                  center: mapLoc
+                });
+
+                var bounds = new google.maps.LatLngBounds();
+                var startingLoc = {lat: startingPoint.lat, lng: startingPoint.lng};
+                var startingMarker = new google.maps.Marker({
+                      position: startingLoc,
+                      map: map,
+                      icon: new google.maps.MarkerImage("https://maps.google.com/mapfiles/ms/icons/yellow-dot.png"),
+                      title: startingPoint.address
+                });
+                bounds.extend(startingLoc);
+
+                for (i = 0; i < events.length; i++) {
+                    var eventLoc = {lat: events[i].latitude, lng: events[i].longitude};
+                    var marker = new google.maps.Marker({
+                      position: eventLoc,
+                      map: map,
+                      title: events[i].address
+                    });
+
+                    bounds.extend(eventLoc);
+                }
+
+                map.fitBounds(bounds);
+            }
+            /*]]>*/
+      }
+    </script>
+        <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQva4PIGIpH90hmOH2Pkc2KksG16g9NFg&amp;callback=initMap"></script>
     </body>
 </html>
