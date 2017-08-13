@@ -21,7 +21,6 @@
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <form th:action="@{/search}" th:object="${searchEvent}" class="navbar-form navbar-left" method="get" role="search">
-
                                 <div class="form-group" th:classappend="${#fields.hasErrors('country')} ? 'has-error has-feedback'">
                                     <select th:field="*{country}" class="form-control" required="true">
                                         <option value="Sweden">Sweden</option>
@@ -46,6 +45,11 @@
                                 </div>
                                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                             </form>
+                            <ul class="nav navbar-nav navbar-right" th:if="${events != null and not #lists.isEmpty(events)}">
+                                <li>
+                                    <a href="#eventDetailsInline" id="eventDetails" class="btn btn-default" role="button">View Details</a>
+                                </li>
+                            </ul>
                         </div><!--/.nav-collapse -->
                     </div><!--/.container-fluid -->
                 </div>

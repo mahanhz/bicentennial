@@ -90,6 +90,7 @@ ext {
 		googleMaps: '0.2.1',
 		thymeleafSpringSecurity: '3.0.2.RELEASE',
 		webjarsBootstrap: '3.3.7-1',
+		webjarsFancyBox: '2.1.5',
 		webjarsFontAwesome: '4.7.0',
 		webjarsJquery: '3.2.1',
 		webjarsLocator: '0.32-1',

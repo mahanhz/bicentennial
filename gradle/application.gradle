@@ -104,6 +104,7 @@ project("application:periphery:ui") {
 		compile("com.google.maps:google-maps-services:${ui_versions.googleMaps}")
 
 		compile("org.webjars:bootstrap:${ui_versions.webjarsBootstrap}")
+		compile("org.webjars:fancybox:${ui_versions.webjarsFancyBox}")
 		compile("org.webjars:font-awesome:${ui_versions.webjarsFontAwesome}")
 		compile("org.webjars:jquery:${ui_versions.webjarsJquery}")
 		compile("org.webjars:modernizr:${ui_versions.webjarsModernizr}")
