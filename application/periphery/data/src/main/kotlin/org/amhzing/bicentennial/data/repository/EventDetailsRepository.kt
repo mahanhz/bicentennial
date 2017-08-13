@@ -25,6 +25,7 @@ class EventDetailsRepository(val eventJpaRepository: EventJpaRepository) : Event
     }
 
     private fun location(location: LocationEntity): Location {
+        // FIXME - this shouldn't be hardcoded
         val address = Address(Country(location.country, "Sweden"), Cluster(location.cluster), location.addressLine)
         val coordinates = Coordinate(location.latitude, location.longitude)
 
