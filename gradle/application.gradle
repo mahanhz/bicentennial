@@ -3,8 +3,6 @@ project("application") {
 
 	dependencies {
 		compile project(':application:configuration')
-
-		optional ("org.springframework.boot:spring-boot-devtools")
 	}
 
 	springBoot {
@@ -46,16 +44,16 @@ project("application:configuration") {
 		compile project(':application:periphery:data')
 		compile project(':application:periphery:ui')
 
-		compile("org.liquibase:liquibase-core:${versions.liquibase}")
-
 		compile ('org.springframework.boot:spring-boot-starter-actuator')
 		compile ('org.springframework.boot:spring-boot-actuator-docs')
 		compile ('org.springframework.boot:spring-boot-starter-aop')
 		compile ('org.springframework.retry:spring-retry')
 
 		compile ("com.h2database:h2")
-
+		compile ("org.liquibase:liquibase-core:${versions.liquibase}")
 		compile ("org.apache.commons:commons-lang3:${versions.commonsLang}")
+
+		optional ("org.springframework.boot:spring-boot-devtools")
 	}
 }
 

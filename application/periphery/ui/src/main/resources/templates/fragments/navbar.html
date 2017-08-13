@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 
     <body>
 
@@ -18,12 +18,33 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <p class="navbar-text" th:text="${infoText}"></p>
+                            <p class="navbar-text">Find event</p>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li class="active"><a th:href="@{/}">Home</a></li>
-                            </ul>
+                            <form th:action="@{/search}" class="navbar-form navbar-left" method="post" role="search">
+                                <div class="form-group">
+                                    <select name="country" class="form-control" required="true">
+                                        <option value="">Country</option>
+                                        <option value="se">Sweden</option>
+                                        <option value="uk">UK</option>
+                                        <option value="us">US</option>
+                                        <option value="ge">Germany</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="address" class="form-control" required="true" placeholder="Address" />
+                                </div>
+                                <div class="form-group">
+                                    <select name="distance" class="form-control" required="true">
+                                        <option value="">Within</option>
+                                        <option value="1">1km</option>
+                                        <option value="5">5km</option>
+                                        <option value="10">10km</option>
+                                        <option value="20">20km</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                            </form>
                         </div><!--/.nav-collapse -->
                     </div><!--/.container-fluid -->
                 </div>
