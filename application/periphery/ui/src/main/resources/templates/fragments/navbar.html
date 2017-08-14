@@ -36,10 +36,10 @@
                                 </div>
                                 <div class="form-group" th:classappend="${#fields.hasErrors('distance')} ? 'has-error has-feedback'">
                                     <select th:field="*{distance}" class="form-control" required="true">
-                                        <option value="1">1km</option>
-                                        <option value="5">5km</option>
-                                        <option value="10">10km</option>
-                                        <option value="20">20km</option>
+                                        <option value="1" th:text="#{distance.1}">12km</option>
+                                        <option value="5" th:text="#{distance.5}">5km</option>
+                                        <option value="10" th:text="#{distance.10}">10km</option>
+                                        <option value="20" th:text="#{distance.20}">20km</option>
                                     </select>
                                     <span th:if="${#fields.hasErrors('distance')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 </div>
@@ -48,7 +48,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <div class="form-group">
-                                        <select id="locales" class="form-control">
+                                        <select th:field="*{lang}" class="form-control" onchange="this.form.submit()">
                                             <option value="" th:text="#{lang.select}">Select Language</option>
                                             <option value="en" th:text="#{lang.en}">English</option>
                                             <option value="sv" th:text="#{lang.sv}">Swedish</option>

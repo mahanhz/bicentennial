@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: mahan_hashemizadeh
+      changes:
+        - createTable:
+            tableName: cluster_t
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_cluster_country
+                    referencedTableName: country_t
+                    referencedColumnNames: id
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_by
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 6
+      author: mahan_hashemizadeh
+      changes:
+      - createIndex:
+          columns:
+          - column:
+              name: name
+          - column:
+              name: country_id
+          indexName: idx_cluster_name_country
+          tableName: cluster_t
+          unique: true
