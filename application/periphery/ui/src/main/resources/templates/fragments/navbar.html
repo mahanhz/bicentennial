@@ -45,6 +45,17 @@
                                 </div>
                                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                             </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <div class="form-group">
+                                        <select id="locales" class="form-control">
+                                            <option value="" th:text="#{lang.select}">Select Language</option>
+                                            <option value="en" th:text="#{lang.en}">English</option>
+                                            <option value="sv" th:text="#{lang.sv}">Swedish</option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
                         </div><!--/.nav-collapse -->
                     </div><!--/.container-fluid -->
                 </div>
