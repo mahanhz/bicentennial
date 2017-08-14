@@ -11,29 +11,56 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div id="eventDetailsInline" style="display:none">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Address</th>
-                                <th>Contact Name</th>
-                                <th>Contact Email</th>
-                                <th>Contact Number</th>
-                                <th>Info</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="default" th:each="event, rowStat : *{events}">
-                                <td th:text="${event.address}">1</td>
-                                <td th:text="${event.contactName}">1</td>
-                                <td th:text="${event.contactEmail}">1</td>
-                                <td th:text="${event.contactNumber}">1</td>
-                                <td th:text="${event.info}">1</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
                 <div id="map"></div>
+            </div>
+            <div class="row" th:if="${events != null and not #lists.isEmpty(events)}">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div id="eventDetailsInline" class="table table-condensed">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="event, rowStat : *{events}">
+                                        <tr th:attr="data-target='#' + ${rowStat.index}" data-toggle="collapse" class="danger accordion-toggle">
+                                            <td>
+                                                <span class="glyphicon glyphicon-arrow-down"></span>
+                                                <th:block th:text="${event.address}"></th:block>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="accordion-body collapse" th:id="${rowStat.index}">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="col-md-2"><b>Contact Name:</b></td>
+                                                            <td class="col-md-10" th:text="${event.contactName}">1</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-2"><b>Contact Email:</b></td>
+                                                            <td  class="col-md-10" th:text="${event.contactEmail}">1</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-2"><b>Contact Number:</b></td>
+                                                            <td class="col-md-10"  th:text="${event.contactNumber}">1</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-2"><b>Info:</b></td>
+                                                            <td class="col-md-10"  th:text="${event.info}">1</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -77,8 +104,8 @@
                 map.fitBounds(bounds);
             }
             /*]]>*/
-      }
-    </script>
+          }
+        </script>
         <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQva4PIGIpH90hmOH2Pkc2KksG16g9NFg&amp;callback=initMap"></script>
     </body>
 </html>

@@ -10,6 +10,6 @@ const val HAVERSINE_PART = "(6371 * acos(cos(radians(:lat)) * cos(radians(latitu
 
 interface EventJpaRepository : JpaRepository<EventEntity, Long>, QueryDslPredicateExecutor<EventEntity> {
 
-    @Query("SELECT * FROM event_t WHERE " + HAVERSINE_PART + " < :km ORDER BY " + HAVERSINE_PART, nativeQuery = true)
+    @Query("SELECT * FROM event_t WHERE " + HAVERSINE_PART + " < :km ORDER BY " + HAVERSINE_PART + " fetch first 10 rows only", nativeQuery = true)
     fun findNearbyEvents(@Param("lat") latitude: Double, @Param("lon") longitude: Double, @Param("km") distance: Int): List<EventEntity>
 }
