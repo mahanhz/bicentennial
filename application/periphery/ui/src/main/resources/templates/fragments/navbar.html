@@ -20,18 +20,20 @@
                             </button>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
-                            <form th:action="@{/search}" th:object="${searchEvent}" class="navbar-form navbar-left" method="get" role="search">
+                            <ul th:if="${searchEvent == null}" class="nav navbar-nav">
+                                <li class="active"><a th:href="@{/}" th:text="#{home}">Home</a></li>
+                            </ul>
+                            <form th:if="${searchEvent != null}" th:action="@{/search}" th:object="${searchEvent}" class="navbar-form navbar-left" method="get" role="search">
                                 <div class="form-group" th:classappend="${#fields.hasErrors('country')} ? 'has-error has-feedback'">
                                     <select th:field="*{country}" class="form-control" required="true">
-                                        <option value="Sweden">Sweden</option>
-                                        <option value="uk">UK</option>
-                                        <option value="us">US</option>
-                                        <option value="ge">Germany</option>
+                                        <option th:each="country : ${countries}"
+                                                th:value="${country.name}"
+                                                th:text="${country.name}">Sweden</option>
                                     </select>
                                     <span th:if="${#fields.hasErrors('country')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group" th:classappend="${#fields.hasErrors('address')} ? 'has-error has-feedback'">
-                                    <input type="text" th:field="*{address}" required="true" class="form-control" placeholder="Address" />
+                                    <input type="text" th:field="*{address}" required="true" class="form-control" th:placeholder="#{search.address}" />
                                     <span th:if="${#fields.hasErrors('address')}" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                 </div>
                                 <div class="form-group" th:classappend="${#fields.hasErrors('distance')} ? 'has-error has-feedback'">
@@ -48,10 +50,12 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <div class="form-group">
-                                        <select th:field="*{lang}" class="form-control" onchange="this.form.submit()">
+                                        <select id="locales" class="form-control">
                                             <option value="" th:text="#{lang.select}">Select Language</option>
                                             <option value="en" th:text="#{lang.en}">English</option>
-                                            <option value="sv" th:text="#{lang.sv}">Swedish</option>
+                                            <option th:each="country : ${countries}"
+                                                    th:value="${country.locale}"
+                                                    th:text="#{'lang.' + ${country.locale}}">Swedish</option>
                                         </select>
                                     </div>
                                 </li>

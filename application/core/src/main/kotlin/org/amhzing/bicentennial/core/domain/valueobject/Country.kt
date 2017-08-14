@@ -6,13 +6,13 @@ import org.apache.commons.lang3.Validate.notBlank
 
 const val COUNTRY_CODE_MAX_LENGTH = 3
 
-class Country(code: String, name: String) {
+class Country(code: String, locale: String) {
     val code: String
-    val name: String
+    val locale: String
 
     init {
         this.code = validate(code)
-        this.name = notBlank(name)
+        this.locale = notBlank(locale)
     }
 
     private fun validate(input: String): String {
@@ -29,18 +29,18 @@ class Country(code: String, name: String) {
         other as Country
 
         if (code != other.code) return false
-        if (name != other.name) return false
+        if (locale != other.locale) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = code.hashCode()
-        result = 31 * result + name.hashCode()
+        result = 31 * result + locale.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "Country(code='$code', name='$name')"
+        return "Country(code='$code', locale='$locale')"
     }
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <th:block th:replace="fragments/head :: head"></th:block>
+    </head>
+    <body>
+        <th:block th:replace="fragments/navbar :: navbar('ERROR')"></th:block>
+
+        <th:block th:replace="fragments/error-body :: error('Oops! Something went wrong!')"></th:block>
+
+        <th:block th:replace="fragments/javascript :: javascript"></th:block>
+    </body>
+</html>

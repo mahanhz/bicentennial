@@ -4,16 +4,18 @@ import org.amhzing.bicentennial.core.boundary.exit.EventRepository
 import org.amhzing.bicentennial.core.domain.root.Event
 import org.amhzing.bicentennial.core.domain.valueobject.*
 import org.amhzing.bicentennial.data.jpa.entity.EventEntity
+import org.amhzing.bicentennial.data.jpa.repository.CountryJpaRepository
 import org.amhzing.bicentennial.data.jpa.repository.EventJpaRepository
 import org.amhzing.bicentennial.data.jpa.entity.Contact as ContactEntity
 import org.amhzing.bicentennial.data.jpa.entity.Location as LocationEntity
 
 
-class EventDetailsRepository(val eventJpaRepository: EventJpaRepository) : EventRepository {
+class EventDetailsRepository(val eventJpaRepository: EventJpaRepository,
+                             val countryJpaRepository: CountryJpaRepository) : EventRepository {
     override fun events(latitude: Double, longitude: Double, distance: Int): List<Event> {
         val events = eventJpaRepository.findNearbyEvents(latitude, longitude, distance)
 
-        return events.map(this::event).toList()
+        return events.map(this::event)
     }
 
     private fun event(event: EventEntity): Event {
@@ -25,8 +27,9 @@ class EventDetailsRepository(val eventJpaRepository: EventJpaRepository) : Event
     }
 
     private fun location(location: LocationEntity): Location {
-        // FIXME - this shouldn't be hardcoded
-        val address = Address(Country(location.country, "Sweden"), Cluster(location.cluster), location.addressLine)
+        val country = countryJpaRepository.findOne(location.country);
+
+        val address = Address(Country(location.country, country.locale), Cluster(location.cluster), location.addressLine)
         val coordinates = Coordinate(location.latitude, location.longitude)
 
         return Location(address, coordinates)

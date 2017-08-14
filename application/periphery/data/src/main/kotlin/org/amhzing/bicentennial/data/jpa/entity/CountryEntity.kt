@@ -8,10 +8,10 @@ import javax.persistence.Id
 class CountryEntity : BaseAuditingEntity {
 
     @Id
-    private var id: String = ""
+    var id: String = ""
 
     @Column(nullable = false, length = 10)
-    private var locale: String = ""
+    var locale: String = ""
 
     // Needed by JPA
     constructor() {}

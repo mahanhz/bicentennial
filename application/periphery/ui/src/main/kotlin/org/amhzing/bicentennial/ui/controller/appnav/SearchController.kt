@@ -1,4 +1,4 @@
-package org.amhzing.bicentennial.ui
+package org.amhzing.bicentennial.ui.controller.appnav
 
 import com.google.maps.GeoApiContext
 import com.google.maps.GeocodingApi
@@ -20,8 +20,6 @@ const val NO_SEARCH_RESULTS = "noSearchResults"
 @Controller
 @RequestMapping(path = arrayOf("/search"))
 class SearchController(private val searchEventAdapter: SearchEventAdapter) {
-
-    private val logger = LoggerFactory.getLogger(SearchEventAdapter::class.java)
 
     @GetMapping
     fun search(@Valid searchEvent: SearchEvent,
@@ -70,5 +68,9 @@ class SearchController(private val searchEventAdapter: SearchEventAdapter) {
                 .build()
 
         return GeocodingApi.newRequest(context).address(fullAddress)
+    }
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(SearchController::class.java)
     }
 }
