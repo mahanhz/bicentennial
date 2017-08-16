@@ -23,7 +23,7 @@ class CacheConfig {
     @Bean
     fun hazelCastConfig(): Config {
         return Config()
-                .setInstanceName("hazelcast-cache")
+                .setInstanceName("hazelcast-instance")
                 .setProperty("hazelcast.jmx", "true")
                 .addMapConfig(MapConfig()
                                       .setName(CacheSpec.COUNTRIES.name)
