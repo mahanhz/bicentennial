@@ -6,7 +6,7 @@ import org.apache.commons.lang3.Validate.notBlank
 
 const val COUNTRY_CODE_MAX_LENGTH = 3
 
-class Country(code: String, locale: String) {
+class Country(code: String, locale: String) : java.io.Serializable {
     val code: String
     val locale: String
 
