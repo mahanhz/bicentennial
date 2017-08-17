@@ -94,18 +94,30 @@ project("application:periphery:data") {
 	}
 }
 
+project("application:periphery:external-api") {
+	description = "Application external API"
+
+	dependencies {
+		compile("com.google.maps:google-maps-services:${external_versions.googleMaps}")
+		compile("io.atlassian.fugue:fugue:${versions.fuque}")
+
+		compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+
+		testCompile app_tests.unit_test
+	}
+}
+
 project("application:periphery:ui") {
 	description = "Application periphery ui"
 
 	dependencies {
 		compile project(':application:adapter')
+		compile project(':application:periphery:external-api')
 
 		compile("org.springframework.boot:spring-boot-starter-web")
 		compile("org.springframework.boot:spring-boot-starter-aop")
 		compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 		//compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:${ui_versions.thymeleafSpringSecurity}")
-
-		compile("com.google.maps:google-maps-services:${ui_versions.googleMaps}")
 
 		compile("org.webjars:bootstrap:${ui_versions.webjarsBootstrap}")
 		compile("org.webjars:fancybox:${ui_versions.webjarsFancyBox}")

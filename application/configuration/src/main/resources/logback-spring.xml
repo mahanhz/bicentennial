@@ -12,6 +12,7 @@
 
     <springProfile name="offline">
         <property name="logLevel" value="DEBUG"/>
+        <property name="cacheLogLevel" value="TRACE"/>
         <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
             <encoder>
                 <pattern>%date %level [%thread] %logger{10} [%file:%line] [%X{appuser:-anonymous}] %msg%n</pattern>
@@ -22,6 +23,7 @@
 
     <springProfile name="!offline">
         <property name="logLevel" value="INFO"/>
+        <property name="cacheLogLevel" value="WARN"/>
         <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
             <encoder class="net.logstash.logback.encoder.LogstashEncoder">
                 <includeMdcKeyName>appuser</includeMdcKeyName>
@@ -37,6 +39,10 @@
     </appender>
 
     <logger name="org.amhzing" level="${logLevel}" additivity="false">
+        <appender-ref ref="ASYNC_STDOUT" />
+    </logger>
+
+    <logger name="org.springframework.cache" level="${cacheLogLevel}" additivity="false">
         <appender-ref ref="ASYNC_STDOUT" />
     </logger>
 

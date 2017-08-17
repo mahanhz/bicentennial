@@ -1,12 +1,9 @@
 package org.amhzing.bicentennial.ui.controller.appnav
 
-import com.google.maps.GeoApiContext
-import com.google.maps.GeocodingApi
-import com.google.maps.GeocodingApiRequest
 import org.amhzing.bicentennial.adapter.SearchEventAdapter
+import org.amhzing.bicentennial.external.boundary.enter.geocode.GeocodingService
 import org.amhzing.bicentennial.ui.model.LocationModel
 import org.amhzing.bicentennial.ui.model.SearchEvent
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -19,7 +16,8 @@ const val NO_SEARCH_RESULTS = "noSearchResults"
 
 @Controller
 @RequestMapping(path = arrayOf("/search"))
-class SearchController(private val searchEventAdapter: SearchEventAdapter) {
+class SearchController(private val searchEventAdapter: SearchEventAdapter,
+                       private val geocodingService: GeocodingService) {
 
     @GetMapping
     fun search(@Valid searchEvent: SearchEvent,
@@ -35,42 +33,23 @@ class SearchController(private val searchEventAdapter: SearchEventAdapter) {
             fullAddress += " " + searchEvent.country
         }
 
-        val req = geocodingApiRequest(fullAddress)
+        val result = geocodingService.location(fullAddress)
 
-        try {
-            val result = req.await()
-
-            if (result.isEmpty()) {
-                return NO_SEARCH_RESULTS
-            }
-
-            val location = result[0].geometry.location
-            val events = searchEventAdapter.events(location.lat, location.lng, searchEvent.distance)
-
-            if (events.isEmpty()) {
-                return NO_SEARCH_RESULTS
-            }
-
-            model.addAttribute("startingPoint", LocationModel(result[0].formattedAddress, location.lat, location.lng))
-            model.addAttribute("events", events)
-        } catch (e: Exception) {
-            logger.error("Unfortunately Google Maps returned this error", e)
-
+        if (result.isLeft) {
             return NO_SEARCH_RESULTS
         }
 
+        val location = result.right().get()
+
+        val events = searchEventAdapter.events(location.latitude, location.longitude, searchEvent.distance)
+
+        if (events.isEmpty()) {
+            return NO_SEARCH_RESULTS
+        }
+
+        model.addAttribute("startingPoint", LocationModel(location.formattedAddress, location.latitude, location.longitude))
+        model.addAttribute("events", events)
+
         return SEARCH_RESULTS
-    }
-
-    private fun geocodingApiRequest(fullAddress: String): GeocodingApiRequest {
-        val context = GeoApiContext.Builder()
-                .apiKey(System.getProperty("bicentennial.google.api.key"))
-                .build()
-
-        return GeocodingApi.newRequest(context).address(fullAddress)
-    }
-
-    companion object {
-        private val logger = LoggerFactory.getLogger(SearchController::class.java)
     }
 }

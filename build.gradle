@@ -59,7 +59,8 @@ configure(subprojects - frameworkAgnostic.collect { project(it) }) {
 
 	dependencyManagement {
 		imports {
-			mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+			mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.SR2"
 		}
 	}
 }
@@ -81,6 +82,7 @@ ext {
 	versions = [
 		commonsLang: '3.6',
         commonsValidator: '1.6',
+		fuque: '4.5.0',
 		hazelcast: '3.8.4',
 		jacksonKotlin: '2.9.0',
 		liquibase: '3.5.3',
@@ -88,11 +90,9 @@ ext {
 		querydsl: "4.1.4"
 	]
 	cache_versions = [
-		hazelcast: '3.7.8',
-		jcache: '1.0.0'
+		hazelcast: '3.7.8'
 	]
 	ui_versions = [
-		googleMaps: '0.2.1',
 		thymeleafSpringSecurity: '3.0.2.RELEASE',
 		webjarsBootstrap: '3.3.7-1',
 		webjarsFancyBox: '2.1.5',
@@ -100,6 +100,9 @@ ext {
 		webjarsJquery: '3.2.1',
 		webjarsLocator: '0.32-1',
 		webjarsModernizr: '2.8.3'
+	]
+	external_versions = [
+		googleMaps: '0.2.1'
 	]
 	test_versions = [
 		kotlinTest: '2.0.5'

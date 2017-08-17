@@ -6,6 +6,7 @@ import org.amhzing.bicentennial.core.domain.valueobject.*
 import org.amhzing.bicentennial.data.jpa.entity.EventEntity
 import org.amhzing.bicentennial.data.jpa.repository.CountryJpaRepository
 import org.amhzing.bicentennial.data.jpa.repository.EventJpaRepository
+import java.util.*
 import org.amhzing.bicentennial.data.jpa.entity.Contact as ContactEntity
 import org.amhzing.bicentennial.data.jpa.entity.Location as LocationEntity
 
@@ -29,7 +30,9 @@ class EventDetailsRepository(val eventJpaRepository: EventJpaRepository,
     private fun location(location: LocationEntity): Location {
         val country = countryJpaRepository.findOne(location.country);
 
-        val address = Address(Country(location.country, country.locale), Cluster(location.cluster), location.addressLine)
+        val locale = country?.locale ?: Locale.ENGLISH.language
+
+        val address = Address(Country(location.country, locale), Cluster(location.cluster), location.addressLine)
         val coordinates = Coordinate(location.latitude, location.longitude)
 
         return Location(address, coordinates)
