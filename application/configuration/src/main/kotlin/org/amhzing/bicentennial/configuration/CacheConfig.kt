@@ -1,7 +1,7 @@
 package org.amhzing.bicentennial.configuration
 
 import com.hazelcast.config.*
-import com.hazelcast.core.EntryListener
+import com.hazelcast.map.listener.MapListener
 import org.amhzing.bicentennial.configuration.event.CacheEntryListener
 import org.amhzing.bicentennial.data.cache.CacheSpec
 import org.springframework.cache.annotation.EnableCaching
@@ -16,7 +16,7 @@ const val DEFAULT_MAX_SIZE: Int  = 500
 class CacheConfig {
 
     @Bean
-    fun cacheEntryListener(): EntryListener<String, Any> {
+    fun cacheEntryListener(): MapListener {
         return CacheEntryListener()
     }
 
@@ -30,6 +30,8 @@ class CacheConfig {
                                       .setMaxSizeConfig(MaxSizeConfig(DEFAULT_MAX_SIZE, MaxSizeConfig.MaxSizePolicy.PER_NODE))
                                       .setEvictionPolicy(EvictionPolicy.LRU)
                                       .setTimeToLiveSeconds(SECONDS_IN_DAY)
-                                      .addEntryListenerConfig(EntryListenerConfig().setImplementation(cacheEntryListener())))
+                                      .addEntryListenerConfig(EntryListenerConfig(cacheEntryListener(),
+                                                                                  false,
+                                                                                  false)))
     }
 }
